@@ -11,7 +11,7 @@ close all
 TypeNACA = '1410';                                                         %Specify NACA 4-digit airfoil
 cr = 1;                                                                    %Root chord (m)
 nodes = 40;                                                                %Number of points along airfoil
-alpha_min = -5;                                                             %Specify the minimum alpha for distribution (no more than 0)
+alpha_min = 0;                                                             %Specify the minimum alpha for distribution (no more than 0)
 alpha_max = 16;                                                            %Specify the maximum alpha for distribution (no less than 16)
 n = 15;                                                                    %Number of points along the span
 b = 8;                                                                     %Wingspan (m)
