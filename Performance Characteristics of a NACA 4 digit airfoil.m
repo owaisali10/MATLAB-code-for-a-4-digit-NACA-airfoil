@@ -6,10 +6,10 @@ clc
 close all
 
 %% Inputs
-TypeNACA = '1412';                                                         %Specify NACA 4-digit airfoil
+TypeNACA = '1410';                                                         %Specify NACA 4-digit airfoil
 cr = 1;                                                                    %Root chord (m)
 nodes = 40;                                                                %Number of points along airfoil
-alpha_min = 0;                                                             %Specify the minimum alpha for distribution (no more than 0)
+alpha_min = -5;                                                             %Specify the minimum alpha for distribution (no more than 0)
 alpha_max = 16;                                                            %Specify the maximum alpha for distribution (no less than 16)
 n = 15;                                                                    %Number of points along the span
 b = 8;                                                                     %Wingspan (m)
@@ -185,7 +185,7 @@ for alpha = alpha_min:1:alpha_max
     dCP = (CPl - CPu)';
     dx = X((((M-1)/2)+1):end);
 
-    Cl_v(k) = trapz(dx.*cos(alpha),dCP);
+    Cl_v(k) = trapz(dx,dCP);
     Cm_v(k) = trapz(dx,-dCP.*dx);
     alpha_d(k) = alpha;
     k = k+1;
