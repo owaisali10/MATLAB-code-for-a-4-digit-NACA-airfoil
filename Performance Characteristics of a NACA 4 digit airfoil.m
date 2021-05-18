@@ -1,5 +1,7 @@
 % Performance Characteristics of a NACA 4 digit airfoil
-% Mir Owais Ali
+% Coded by: Mir Owais Ali
+% Concordia University
+% Can be used for educational purposes only
 
 clear
 clc
