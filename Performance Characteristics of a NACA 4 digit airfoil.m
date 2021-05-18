@@ -11,11 +11,11 @@ close all
 TypeNACA = '1410';                                                         %Specify NACA 4-digit airfoil
 cr = 1;                                                                    %Root chord (m)
 nodes = 40;                                                                %Number of points along airfoil
-alpha_min = 0;                                                             %Specify the minimum alpha for distribution (no more than 0)
+alpha_min = -5;                                                            %Specify the minimum alpha for distribution (no more than 0)
 alpha_max = 16;                                                            %Specify the maximum alpha for distribution (no less than 16)
 n = 15;                                                                    %Number of points along the span
 b = 8;                                                                     %Wingspan (m)
-TR = 1;                                                                    %Taper Ratio
+TR = 0.7;                                                                  %Taper Ratio
 
 %% Initialization
 z_c = zeros(nodes,1);
@@ -163,7 +163,7 @@ for alpha = alpha_min:1:alpha_max
         AN(M,j) = 0;
     end
     RHS(M) = 0;
-                                                                           % Solving for a system of linear equations
+                                                                           %Solving for a system of linear equations
     Gama = AN\RHS;                                                             
 
     for i = 1:M-1
@@ -247,14 +247,14 @@ for alpha = alpha_min:1:alpha_max
 
     k = k+1;
 end
-alpha_L0 = alpha-Cl_th(k-1)/(2*pi);                             %Zero-Lift Angle of Attack
+alpha_L0 = alpha-Cl_th(k-1)/(2*pi);                                        %Zero-Lift Angle of Attack
 
 %% Finite Wing Method
 if (TR == 1)
     cr = c;
     ct = c;
 elseif (TR < 1)
-    cr = cr;                                                               %Specify root chord
+    cr;                                                                    %Specify root chord
     ct = TR*cr;
 end
 AR = (2*b)/(cr*(1+TR));                                                    %Aspect Ratio
@@ -262,7 +262,6 @@ S = b^2/AR;                                                                %Wing
 phi = linspace(1E-10,pi/2,n);                                              %Span angle distribution
 c_d = ct+((cr-ct)/(pi/2))*phi;                                             %Chord Distribution
 mue = c_d*2*pi/(4*b);
-alpha_L0 = degtorad(-2.5);
 k = 1;
 for alpha = alpha_min:1:alpha_max
     alpha = degtorad(alpha);
